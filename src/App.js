@@ -2,7 +2,7 @@ import React from 'react'
 
 const App = () => {
   return (
-    <div className="">App</div>
+    <div className="w-screen h-auto flex flex-col">App</div>
   )
 }
 
