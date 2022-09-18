@@ -3,6 +3,7 @@ import Logo from "../img/logo1.png"
 import Avatar from "../img/avatar.png"
 import { motion } from 'framer-motion'
 import {MdLogout, MdShoppingBasket} from 'react-icons/md'
+import { Link } from 'react-router-dom'
 const Headers = () => {
         const [isMenu, setIsMenu] = useState(false)
         const login=()=>{
@@ -51,12 +52,13 @@ const Headers = () => {
                                 </div>
                         </div>
                         <div className='relative'>
+                                <Link to={"/login"}>
                                 <motion.img
                                  whileTap={{scale:0.6}}
                                  src={Avatar}
                                  className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
-                                 onClick={login}
                                 />
+                                </Link>
                                   {
                                 isMenu && (
                                 <motion.div
