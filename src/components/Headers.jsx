@@ -4,14 +4,19 @@ import Avatar from "../img/avatar.png"
 import { motion } from 'framer-motion'
 import {MdLogout, MdShoppingBasket} from 'react-icons/md'
 import { Link } from 'react-router-dom'
+import { actionTypes } from '../context/reducer'
+import { useStateValue } from '../context/StateProvider'
 const Headers = () => {
+        const [{ user }, dispatch] = useStateValue()
         const [isMenu, setIsMenu] = useState(false)
-        const login=()=>{
-                setIsMenu(!isMenu)
-        }
-        const logout=()=>{
+        const logout = async () => {
                 setIsMenu(false)
-        }
+                localStorage.clear()
+                dispatch({
+                  type: actionTypes.SET_USER,
+                  user: null
+                })
+              }
   return (
         <header className='w-screen fixed z-50 p-3 px-4 md:p-6 md:px-16 bg-primary'>
                 <div className='hidden md:flex w-full h-full items-center justify-between'>
@@ -51,16 +56,15 @@ const Headers = () => {
                                         <p className='text-xs text-white font-semibold'>1</p>
                                 </div>
                         </div>
-                        <div className='relative'>
-                                <Link to={"/login"}>
+                        <div className='relative flex'>
                                 <motion.img
                                  whileTap={{scale:0.6}}
-                                 src={Avatar}
+                                 src={user ? user.photoURL : Avatar}
                                  className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
+                                 onClick={() => setIsMenu(!isMenu)}
                                 />
-                                </Link>
                                   {
-                                isMenu && (
+                                isMenu&&user && (
                                 <motion.div
                                 initial={{opacity:0,scale:0.6}}
                                 animate={{opacity:1,scale:1}}
@@ -75,6 +79,13 @@ const Headers = () => {
                                 </p>
                                 </motion.div>
                                 )}
+                                {!user?
+                                <Link to={"/login"}>
+                                    <p className='ml-6 mt-2 cursor-pointer'>Đăng nhập</p>     
+                                </Link>
+                                :
+                                <div></div>
+                                }
                         </div>
                 </div>
                 <div className='flex md:hidden w-full h-full'></div>
