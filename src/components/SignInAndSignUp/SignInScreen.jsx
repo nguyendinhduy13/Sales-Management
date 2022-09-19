@@ -2,25 +2,35 @@ import React from 'react'
 import Logo from "../../img/logo1.png"
 import LogoGoogle from "../../img/Google.png"
 import LogoFaceBook from "../../img/Facebook.png"
-import {getAuth,signInWithPopup,GoogleAuthProvider} from "firebase/auth";
+import {getAuth,signInWithPopup,GoogleAuthProvider,FacebookAuthProvider} from "firebase/auth";
 import { app } from '../../firebase.config';
 import { actionTypes } from '../../context/reducer';
 import {useStateValue} from "../../context/StateProvider";
 import { Link } from 'react-router-dom';
 const SignInScreen = () => {
         const firebaseAuth=getAuth(app);
-        const provider=new GoogleAuthProvider();
+        const providergg=new GoogleAuthProvider();
+        const providerfb=new FacebookAuthProvider();
         const [{user},dispatch]=useStateValue();
 
-        const login = async()=>{
+        const loginGoogle = async()=>{
                 if(!user){
-                        console.log("aaaa")
-                        const {user:{refreshToken,providerData}}= await signInWithPopup(firebaseAuth,provider);
+                        const {user:{refreshToken,providerData}}= await signInWithPopup(firebaseAuth,providergg);
                         dispatch({
                                 type:actionTypes.SET_USER,
                                 user:providerData[0]
                         })
                         localStorage.setItem("user",JSON.stringify(providerData[0]));
+                }
+        }
+
+        const loginFacebook = async()=>{
+                if(!user){
+                        const {user:{refreshToken,providerData}}= await signInWithPopup(firebaseAuth,providerfb);
+                        dispatch({
+                                type:actionTypes.SET_USER,
+                                user:providerData[0]
+                        })
                 }
         }
 
@@ -48,7 +58,7 @@ const SignInScreen = () => {
                         </Link>
                         <p className='mt-3 ml-10 text-[15px] text-cartNumBg cursor-pointer'>Quên mật khẩu</p>
                         <div className='flex mt-6'>
-                                <Link to={"/"} className='ml-8 flex border-2 border-gray-200 h-10 w-44 items-center justify-center cursor-pointer' onClick={login}>
+                                <Link to={"/"} className='ml-8 flex border-2 border-gray-200 h-10 w-44 items-center justify-center cursor-pointer' onClick={loginGoogle}>
                                 <img
                                 src={LogoGoogle}
                                 alt="logo"
@@ -56,7 +66,7 @@ const SignInScreen = () => {
                                 />
                                 <p className='ml-3'>Google</p>
                                 </Link>
-                                <Link to={"/"} className='ml-11 flex border-2 border-gray-200 h-10 w-44 items-center justify-center cursor-pointer'>
+                                <Link to={"/"} className='ml-11 flex border-2 border-gray-200 h-10 w-44 items-center justify-center cursor-pointer' onClick={loginFacebook}>
                                 <img
                                 src={LogoFaceBook}
                                 alt="logo"
