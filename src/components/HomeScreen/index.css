@@ -1,0 +1,10 @@
+.SM-tabs-menu{
+    display:flex;
+    justify-content:space-between;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+.SM-icon{
+    width: 24px;
+    height: 24px;
+}

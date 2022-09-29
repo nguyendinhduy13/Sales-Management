@@ -31,26 +31,26 @@ const Headers = () => {
                         exit={{opacity:0,x:200}}
                         className='flex items-center gap-10'
                         >
-                                <li className='text-lg text-textColor hover:text-headingColor duration-100
+                                <li className='text-lg text-textColor hover:text-slate-900 duration-100
                                 transition-all ease-in-out cursor-pointer'>
                                         Home
                                 </li>
-                                <li className='text-lg text-textColor hover:text-headingColor duration-100
+                                <li className='text-lg text-textColor hover:text-slate-900 duration-100
                                 transition-all ease-in-out cursor-pointer'>
                                         Menu
                                 </li>
-                                <li className='text-lg text-textColor hover:text-headingColor duration-100
+                                <li className='text-lg text-textColor hover:text-slate-900 duration-100
                                 transition-all ease-in-out cursor-pointer'>
                                         About us
                                 </li>
-                                <li className='text-lg text-textColor hover:text-headingColor duration-100
+                                <li className='text-lg text-textColor hover:text-slate-900 duration-100
                                 transition-all ease-in-out cursor-pointer'>
                                         Service
                                 </li>
                         </motion.ul>
                         <div className='relative flex items-center justify-center'>
                                 <MdShoppingBasket
-                                className='text-textColor text-2xl ml-8 -mt-1 cursor-pointer'
+                                className='text-textColor hover:text-slate-900 text-2xl ml-8 -mt-1 cursor-pointer'
                                 />
                                 <div className='absolute -right-2 -top-2 w-5 h-5 rounded-full bg-cartNumBg flex items-center justify-center'>
                                         <p className='text-xs text-white font-semibold'>1</p>
